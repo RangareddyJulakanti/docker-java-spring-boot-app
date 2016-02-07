@@ -39,8 +39,7 @@ $ docker run --rm -p 8080:8080 -it tombee/spring-boot-app:0.0.1
 ### Pushing an image
 
 ```shell
-$ export VERSION=0.0.1
-$ ./script/run make push
+$ VERSION=0.0.1 ./script/run make push
 ```
 
 ## How does it work?
@@ -62,3 +61,5 @@ The `Makefile` provides a series of targets to record the commonly executed comm
 This is a helper script to run our build environment container, it accepts parameters that you wish to run inside the container.  Given `./script/run make`, it will build the jar file and create a runtime docker image.
 
 As an optimisation, it breaks filesystem isolation by volume mounting `~/.m2` onto the host's filesystem.  This helps to make incremental builds faster, this can be safely removed if this behaviour is unwanted.
+
+It also bind mounts `~/.docker/config.json` to `/root/.docker/config.json` to use your registry authentication (`docker login`) details inside the container to be able to push.  If you don't want this behaviour, you could either tweak the scripts to accept registry credentials.  Another alternative would be to just run `make push` on the host.
