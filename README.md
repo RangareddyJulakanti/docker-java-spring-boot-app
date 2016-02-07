@@ -6,7 +6,7 @@ This is a simple spring-boot application that is both built and executed using D
 
 Having spent some time building Docker images for Java and spring-boot applications over the past couple of years, I've found the current tooling and practices around using Docker with maven and gradle frustrating and overcomplicated.  I also feel that by using a maven plugin, we are missing out on the benefit of isolating the JDK and maven/gradle dependencies using Docker.
 
-The maven/gradle plugin approach still assumes that the environment that you are running in has the correct JDK available for your application's build, and then also has the correct version of maven.  This usually becomes a case of either manually configuring these installs in your CI system.
+The maven/gradle plugin approach still assumes that the environment that you are running in has the correct JDK available for your application's build, and then also has the correct version of maven.  This usually means manually configuring these installs in your CI system.
 
 After working with Docker built projects in other languages, I thought I'd come back and try to apply some of the practices I'd seen to see if it would make building a Java application seem less complex.
 
