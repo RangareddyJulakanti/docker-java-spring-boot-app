@@ -42,6 +42,12 @@ $ docker run --rm -p 8080:8080 -it tombee/spring-boot-app:0.0.1
 $ VERSION=0.0.1 ./script/run make push
 ```
 
+### Using compose for development
+
+```shell
+$ docker-compose up
+```
+
 ## How does it work?
 
 ### `Dockerfile.build`
@@ -63,3 +69,7 @@ This is a helper script to run our build environment container, it accepts param
 As an optimisation, it breaks filesystem isolation by volume mounting `~/.m2` onto the host's filesystem.  This helps to make incremental builds faster, this can be safely removed if this behaviour is unwanted.
 
 It also bind mounts `~/.docker/config.json` to `/root/.docker/config.json` to use your registry authentication (`docker login`) details inside the container to be able to push.  If you don't want this behaviour, you could either tweak the scripts to accept registry credentials.  Another alternative would be to just run `make push` on the host.
+
+### `docker-compose.yml`
+
+I've also included a sample `docker-compose.yml` file here that can be used to show how to run this application during development.  It allows a developer to quickly get started by just running `docker-compose up` and having a working development environment, without having to have any of the maven/java tooling installed upon their host.  It uses our dev image for the container, since we need the build and test tooling.
